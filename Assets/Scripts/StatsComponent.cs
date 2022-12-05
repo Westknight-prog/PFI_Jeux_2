@@ -4,14 +4,15 @@ using UnityEngine;
 
 public class StatsComponent : MonoBehaviour
 {
-    public int Hp;
+    public int MaxHp;
+    public int CurrentHp;
     public int Accuracy;
     public int Attack;
     public int Defense;
 
     public bool TakeDamage(int damage)
     {
-        return Hp - damage >= 0;
+        return CurrentHp - damage >= 0;
     }
 
 }

@@ -5,8 +5,8 @@ using UnityEngine;
 public class MoveCameraComponent : MonoBehaviour
 {
 
-    float height = 15f;
-    float distance = -15f;
+    float height = 5f;
+    float distance = -5f;
     [SerializeField] GameObject player;
     // Start is called before the first frame update
     void Start()
