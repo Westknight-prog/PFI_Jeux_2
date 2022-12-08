@@ -27,15 +27,10 @@ public class GoToClickComponent : MonoBehaviour
         if (Physics.Raycast(ray, out hit))
         {
             plane.Raycast(ray, out distance);
-            if (hit.collider.tag != "Wall")
+            if (hit.collider.tag == "Ground")
             {
                 moveAgent.destination = ray.GetPoint(distance);
-            }
-            if (hit.collider.tag == "Item")
-            {
-                targetEnemy = null;
-                targetItem = hit.collider.gameObject;
-                Debug.Log(hit.collider.gameObject);
+                transform.LookAt(ray.GetPoint(distance));
             }
             if(hit.collider.tag == "Enemy")
             {

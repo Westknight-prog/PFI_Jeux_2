@@ -10,9 +10,9 @@ public class StatsComponent : MonoBehaviour
     public int Attack;
     public int Defense;
 
-    public bool TakeDamage(int damage)
+    public void TakeDamage(int damage)
     {
-        return CurrentHp - damage >= 0;
+        CurrentHp -= damage;
     }
 
 }

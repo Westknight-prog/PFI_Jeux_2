@@ -35,6 +35,15 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Menu"",
+                    ""type"": ""Button"",
+                    ""id"": ""bb011242-7c94-4d6b-a5b1-480572457766"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -48,6 +57,17 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""action"": ""Click"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f76999dd-d6e2-460f-87b7-f0dfc0fbb2f8"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Menu"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -57,6 +77,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         // PlayersControls
         m_PlayersControls = asset.FindActionMap("PlayersControls", throwIfNotFound: true);
         m_PlayersControls_Click = m_PlayersControls.FindAction("Click", throwIfNotFound: true);
+        m_PlayersControls_Menu = m_PlayersControls.FindAction("Menu", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -117,11 +138,13 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     private readonly InputActionMap m_PlayersControls;
     private IPlayersControlsActions m_PlayersControlsActionsCallbackInterface;
     private readonly InputAction m_PlayersControls_Click;
+    private readonly InputAction m_PlayersControls_Menu;
     public struct PlayersControlsActions
     {
         private @PlayerControls m_Wrapper;
         public PlayersControlsActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
         public InputAction @Click => m_Wrapper.m_PlayersControls_Click;
+        public InputAction @Menu => m_Wrapper.m_PlayersControls_Menu;
         public InputActionMap Get() { return m_Wrapper.m_PlayersControls; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -134,6 +157,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @Click.started -= m_Wrapper.m_PlayersControlsActionsCallbackInterface.OnClick;
                 @Click.performed -= m_Wrapper.m_PlayersControlsActionsCallbackInterface.OnClick;
                 @Click.canceled -= m_Wrapper.m_PlayersControlsActionsCallbackInterface.OnClick;
+                @Menu.started -= m_Wrapper.m_PlayersControlsActionsCallbackInterface.OnMenu;
+                @Menu.performed -= m_Wrapper.m_PlayersControlsActionsCallbackInterface.OnMenu;
+                @Menu.canceled -= m_Wrapper.m_PlayersControlsActionsCallbackInterface.OnMenu;
             }
             m_Wrapper.m_PlayersControlsActionsCallbackInterface = instance;
             if (instance != null)
@@ -141,6 +167,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @Click.started += instance.OnClick;
                 @Click.performed += instance.OnClick;
                 @Click.canceled += instance.OnClick;
+                @Menu.started += instance.OnMenu;
+                @Menu.performed += instance.OnMenu;
+                @Menu.canceled += instance.OnMenu;
             }
         }
     }
@@ -148,5 +177,6 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     public interface IPlayersControlsActions
     {
         void OnClick(InputAction.CallbackContext context);
+        void OnMenu(InputAction.CallbackContext context);
     }
 }
