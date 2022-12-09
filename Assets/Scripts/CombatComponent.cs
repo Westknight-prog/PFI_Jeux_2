@@ -7,6 +7,7 @@ public class CombatComponent : MonoBehaviour
     StatsComponent targetStats;
     StatsComponent selfStats;
     bool isInCombat = false;
+    public float radius;
     void Awake()
     {
     }
@@ -14,14 +15,18 @@ public class CombatComponent : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       
-    }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.tag == "Player")
+        Collider[] hitColliders = Physics.OverlapSphere(gameObject.transform.position, radius);
+        foreach (var hitCollider in hitColliders)
         {
-            collision.gameObject.GetComponent<StatsComponent>().TakeDamage(1);
+            if (hitCollider.tag == "Enemy")
+            {
+                if (!isInCombat)
+                {
+                    StartCombat(hitCollider.gameObject);
+                }
+
+            }
+
         }
     }
 
@@ -35,7 +40,7 @@ public class CombatComponent : MonoBehaviour
             isInCombat = true;
             StartCoroutine("Combat");
         }
-       
+
     }
     public void StopCombat()
     {
@@ -49,22 +54,31 @@ public class CombatComponent : MonoBehaviour
     }
     IEnumerator Combat()
     {
-        while (isInCombat)
-        {
-            Attack();
-            yield return new WaitForSeconds(2f);
-        }
+        Attack();
+        yield return new WaitForSeconds(2f);
+        StopCombat();
     }
 
     private void Attack()
     {
-        if (targetStats.Defense / 3 <= Random.Range(1, selfStats.Accuracy / 3))
+        if (targetStats.Defense <= Random.Range(1, selfStats.Accuracy))
         {
-            Debug.Log("Hit de " + Random.Range(1, selfStats.Attack/3));
+            int damage = Random.Range(1, selfStats.Attack / 3);
+            targetStats.TakeDamage(damage);
+            
+            if(targetStats.Defense <= Random.Range(1, targetStats.Accuracy))
+            {
+                damage = Random.Range(1, selfStats.Attack / 3);
+                selfStats.TakeDamage(damage);
+            }
+            else
+            {
+                selfStats.TakeDamage(0);
+            }
         }
         else
         {
-            Debug.Log("Miss");
+            targetStats.TakeDamage(0);
         }
     }
 

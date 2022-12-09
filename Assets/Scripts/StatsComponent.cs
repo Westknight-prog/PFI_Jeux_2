@@ -9,10 +9,23 @@ public class StatsComponent : MonoBehaviour
     public int Accuracy;
     public int Attack;
     public int Defense;
+    public bool dead = false;
+
 
     public void TakeDamage(int damage)
     {
-        CurrentHp -= damage;
+        Debug.Log(gameObject.name + " takes " + damage + " damage");
+        if(!dead &&(CurrentHp -= damage) <= 0)
+        {
+            dead = true;
+        }
     }
+
+    public void OnEnable()
+    {
+        CurrentHp = MaxHp;
+        dead = false;
+    }
+
 
 }
