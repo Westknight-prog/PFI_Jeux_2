@@ -8,7 +8,7 @@ public class StatsComponent : MonoBehaviour
     public int CurrentHp;
     public int Accuracy;
     public int Attack;
-    public int Defense;
+    public int Defence;
     public bool dead = false;
 
 

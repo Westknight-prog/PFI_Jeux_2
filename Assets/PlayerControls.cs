@@ -44,6 +44,15 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Skill"",
+                    ""type"": ""Button"",
+                    ""id"": ""9119ca8d-2ea6-4eff-84fe-d823d2382414"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -68,6 +77,17 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""action"": ""Menu"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""858fb184-bce7-4127-aa2b-e677fb5d96ad"",
+                    ""path"": ""<Keyboard>/k"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Skill"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -78,6 +98,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         m_PlayersControls = asset.FindActionMap("PlayersControls", throwIfNotFound: true);
         m_PlayersControls_Click = m_PlayersControls.FindAction("Click", throwIfNotFound: true);
         m_PlayersControls_Menu = m_PlayersControls.FindAction("Menu", throwIfNotFound: true);
+        m_PlayersControls_Skill = m_PlayersControls.FindAction("Skill", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -139,12 +160,14 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     private IPlayersControlsActions m_PlayersControlsActionsCallbackInterface;
     private readonly InputAction m_PlayersControls_Click;
     private readonly InputAction m_PlayersControls_Menu;
+    private readonly InputAction m_PlayersControls_Skill;
     public struct PlayersControlsActions
     {
         private @PlayerControls m_Wrapper;
         public PlayersControlsActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
         public InputAction @Click => m_Wrapper.m_PlayersControls_Click;
         public InputAction @Menu => m_Wrapper.m_PlayersControls_Menu;
+        public InputAction @Skill => m_Wrapper.m_PlayersControls_Skill;
         public InputActionMap Get() { return m_Wrapper.m_PlayersControls; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -160,6 +183,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @Menu.started -= m_Wrapper.m_PlayersControlsActionsCallbackInterface.OnMenu;
                 @Menu.performed -= m_Wrapper.m_PlayersControlsActionsCallbackInterface.OnMenu;
                 @Menu.canceled -= m_Wrapper.m_PlayersControlsActionsCallbackInterface.OnMenu;
+                @Skill.started -= m_Wrapper.m_PlayersControlsActionsCallbackInterface.OnSkill;
+                @Skill.performed -= m_Wrapper.m_PlayersControlsActionsCallbackInterface.OnSkill;
+                @Skill.canceled -= m_Wrapper.m_PlayersControlsActionsCallbackInterface.OnSkill;
             }
             m_Wrapper.m_PlayersControlsActionsCallbackInterface = instance;
             if (instance != null)
@@ -170,6 +196,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @Menu.started += instance.OnMenu;
                 @Menu.performed += instance.OnMenu;
                 @Menu.canceled += instance.OnMenu;
+                @Skill.started += instance.OnSkill;
+                @Skill.performed += instance.OnSkill;
+                @Skill.canceled += instance.OnSkill;
             }
         }
     }
@@ -178,5 +207,6 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     {
         void OnClick(InputAction.CallbackContext context);
         void OnMenu(InputAction.CallbackContext context);
+        void OnSkill(InputAction.CallbackContext context);
     }
 }

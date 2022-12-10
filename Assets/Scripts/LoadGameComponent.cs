@@ -12,7 +12,7 @@ public class LoadGameComponent : MonoBehaviour
             Debug.Log("Continue");
             playerStats.Attack = PlayerPrefs.GetInt("Attack");
             playerStats.Accuracy = PlayerPrefs.GetInt("Accuracy");
-            playerStats.Defense = PlayerPrefs.GetInt("Defense");
+            playerStats.Defence = PlayerPrefs.GetInt("Defense");
             playerStats.MaxHp = PlayerPrefs.GetInt("MaxHp");
             playerStats.CurrentHp = PlayerPrefs.GetInt("CurrentHp");
         }
@@ -25,7 +25,7 @@ public class LoadGameComponent : MonoBehaviour
     {
         PlayerPrefs.SetInt("Attack", playerStats.Attack);
         PlayerPrefs.SetInt("Accuracy", playerStats.Accuracy);
-        PlayerPrefs.SetInt("Defense", playerStats.Defense);
+        PlayerPrefs.SetInt("Defense", playerStats.Defence);
         PlayerPrefs.SetInt("MaxHp", playerStats.MaxHp);
         PlayerPrefs.SetInt("CurrentHp", playerStats.CurrentHp);
     }

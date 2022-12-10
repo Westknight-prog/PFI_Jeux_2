@@ -61,24 +61,22 @@ public class CombatComponent : MonoBehaviour
 
     private void Attack()
     {
-        if (targetStats.Defense <= Random.Range(1, selfStats.Accuracy))
+        if (targetStats.Defence <= Random.Range(1, selfStats.Accuracy))
         {
-            int damage = Random.Range(1, selfStats.Attack / 3);
-            targetStats.TakeDamage(damage);
-            
-            if(targetStats.Defense <= Random.Range(1, targetStats.Accuracy))
-            {
-                damage = Random.Range(1, selfStats.Attack / 3);
-                selfStats.TakeDamage(damage);
-            }
-            else
-            {
-                selfStats.TakeDamage(0);
-            }
+            targetStats.TakeDamage(Random.Range(1, selfStats.Attack / 3));
         }
         else
         {
             targetStats.TakeDamage(0);
+        }
+
+        if (targetStats.Defence <= Random.Range(1, targetStats.Accuracy))
+        {
+            selfStats.TakeDamage(Random.Range(1, selfStats.Attack / 3));
+        }
+        else
+        {
+            selfStats.TakeDamage(0);
         }
     }
 
