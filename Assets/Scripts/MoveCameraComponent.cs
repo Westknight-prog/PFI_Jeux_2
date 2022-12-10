@@ -6,7 +6,7 @@ public class MoveCameraComponent : MonoBehaviour
 {
 
     float height = 5f;
-    float distance = -5f;
+    float distance = 5f;
     [SerializeField] GameObject player;
     // Start is called before the first frame update
     void Start()
