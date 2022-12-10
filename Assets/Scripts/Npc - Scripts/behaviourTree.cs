@@ -277,20 +277,6 @@ public class Chase : Node
         state = NodeState.Failure;
         return state;
     }
-
-    //public override NodeState Evaluate()
-    //{
-    //    Vector3 enemy = (Vector3)parent.GetData("target");
-    //    agent.destination = enemy;
-    //    if (agent.remainingDistance <= agent.stoppingDistance)
-    //    {
-    //        state = NodeState.Success;
-    //        return state;
-    //    }
-    //    state = NodeState.Running;
-    //    return state;
-        
-    //}
 }
 
 public class Attack : Node 
