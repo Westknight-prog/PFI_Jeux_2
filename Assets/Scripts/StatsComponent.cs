@@ -11,8 +11,8 @@ public class StatsComponent : MonoBehaviour
     public int Defence; 
     public bool dead = false;
     public int levelPossible = 0;
-    int Level = 1;
-    int Exp;
+    public int Level = 1;
+    public int Exp;
 
      
 
