@@ -18,7 +18,6 @@ public class TeleportComponent : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log(other.transform.tag);
         if(other.transform.tag == RedPortalEnter.tag)
         {
             agent.Warp(BluePortalExit.position);
