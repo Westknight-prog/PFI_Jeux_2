@@ -9,12 +9,20 @@ public class LoadGameComponent : MonoBehaviour
     {
         if (PlayerPrefs.GetString("Type") == "Continue")
         {
-            Debug.Log("Continue");
-            playerStats.Attack = PlayerPrefs.GetInt("Attack");
-            playerStats.Accuracy = PlayerPrefs.GetInt("Accuracy");
-            playerStats.Defence = PlayerPrefs.GetInt("Defense");
-            playerStats.MaxHp = PlayerPrefs.GetInt("MaxHp");
-            playerStats.CurrentHp = PlayerPrefs.GetInt("CurrentHp");
+            string[] listStats = PlayerPrefs.GetString("playerStats").Split(',');
+            string[] listPosition = PlayerPrefs.GetString("playerPosition").Split(',');
+            Vector3 positionSaved = new Vector3(float.Parse(listPosition[0]), float.Parse(listPosition[1]), float.Parse(listPosition[2]));
+
+            playerStats.Level = int.Parse(listStats[0]);
+            playerStats.Exp = int.Parse(listStats[1]);
+            playerStats.CurrentHp = int.Parse(listStats[2]);
+            playerStats.MaxHp = int.Parse(listStats[3]);
+            playerStats.Accuracy = int.Parse(listStats[4]);
+            playerStats.Attack = int.Parse(listStats[5]);
+            playerStats.Defence = int.Parse(listStats[6]);
+
+            playerStats.gameObject.transform.position = positionSaved;
+
         }
         else
         {
@@ -23,11 +31,16 @@ public class LoadGameComponent : MonoBehaviour
     }
     public void SaveGame()
     {
-        PlayerPrefs.SetInt("Attack", playerStats.Attack);
-        PlayerPrefs.SetInt("Accuracy", playerStats.Accuracy);
-        PlayerPrefs.SetInt("Defense", playerStats.Defence);
-        PlayerPrefs.SetInt("MaxHp", playerStats.MaxHp);
-        PlayerPrefs.SetInt("CurrentHp", playerStats.CurrentHp);
+        PlayerPrefs.SetString("playerStats", $"{playerStats.Level}," +
+                                             $"{playerStats.Exp}," +
+                                             $"{playerStats.CurrentHp}," +
+                                             $"{playerStats.MaxHp}," +
+                                             $"{playerStats.Accuracy}," +
+                                             $"{playerStats.Attack}," +
+                                             $"{playerStats.Defence}");
+        PlayerPrefs.SetString("playerPosition", $"{playerStats.gameObject.transform.position.x}," +
+                                               $"{playerStats.gameObject.transform.position.y}," +
+                                               $"{playerStats.gameObject.transform.position.z}");
     }
 
     void Update()
