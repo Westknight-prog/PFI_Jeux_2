@@ -6,7 +6,9 @@ public class EnemyComponent : MonoBehaviour
 {
     StatsComponent selfStats;
     bool respawning = false;
-    
+    public int ExpValue;
+
+
     void Awake()
     {
         selfStats = GetComponent<StatsComponent>();
@@ -19,11 +21,7 @@ public class EnemyComponent : MonoBehaviour
     }
     private void OnDisable()
     {
-        
-    }
-    private void OnEnable()
-    {
-        selfStats.CurrentHp = selfStats.MaxHp;
+        GameObject.FindWithTag("Player").GetComponent<StatsComponent>().GetExp(ExpValue);
     }
 
     

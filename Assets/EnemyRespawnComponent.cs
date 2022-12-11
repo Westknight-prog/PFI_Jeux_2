@@ -32,8 +32,9 @@ public class EnemyRespawnComponent : MonoBehaviour
     {
         respawning = true;
         enemy.gameObject.SetActive(false);
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(5);
         enemy.transform.position = gameObject.transform.position;
+        enemyStats.Heal();
         enemy.gameObject.SetActive(true);
         respawning = false;
     }

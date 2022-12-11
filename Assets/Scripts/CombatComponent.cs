@@ -4,12 +4,14 @@ using UnityEngine;
 [RequireComponent(typeof(StatsComponent))]
 public class CombatComponent : MonoBehaviour
 {
+    Animator playerAnimator;
     StatsComponent targetStats;
     StatsComponent selfStats;
     bool isInCombat = false;
     public float radius;
     void Awake()
     {
+        playerAnimator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -48,6 +50,7 @@ public class CombatComponent : MonoBehaviour
         {
             isInCombat = false;
             targetStats = null;
+            playerAnimator.SetBool("isAttacking", false);
             StopCoroutine("Combat");
         }
 
@@ -63,7 +66,9 @@ public class CombatComponent : MonoBehaviour
     {
         if (targetStats.Defence <= Random.Range(1, selfStats.Accuracy))
         {
+            selfStats.gameObject.transform.LookAt(targetStats.transform);
             targetStats.TakeDamage(Random.Range(1, selfStats.Attack / 3));
+            playerAnimator.SetBool("isAttacking", true);
         }
         else
         {
@@ -72,7 +77,7 @@ public class CombatComponent : MonoBehaviour
 
         if (targetStats.Defence <= Random.Range(1, targetStats.Accuracy))
         {
-            selfStats.TakeDamage(Random.Range(1, selfStats.Attack / 3));
+            selfStats.TakeDamage(Random.Range(1, targetStats.Attack / 3));
         }
         else
         {
