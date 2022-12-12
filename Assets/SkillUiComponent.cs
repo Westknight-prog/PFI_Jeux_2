@@ -42,7 +42,7 @@ public class SkillUiComponent : MonoBehaviour
         textAttack.text = playerStats.Attack.ToString();
         textDefense.text = playerStats.Defence.ToString();
         textCurrentHp.text = playerStats.CurrentHp.ToString();
-        textMaxHp.text = playerStats.Accuracy.ToString();
+        textMaxHp.text = playerStats.MaxHp.ToString();
 
         if (playerStats.levelPossible >= 1)
         {
