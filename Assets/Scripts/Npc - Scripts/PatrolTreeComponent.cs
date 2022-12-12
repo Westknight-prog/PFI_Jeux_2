@@ -11,6 +11,7 @@ public class PatrolTreeComponent : MonoBehaviour
     [SerializeField] Transform[] destinations;
     [SerializeField] float waitTime = 2;
     [SerializeField] Animator animator;
+    [SerializeField] float DetectionDistance = 5;
     NavMeshAgent agent;
     Node root, tryDetectChase, enemyDetected, patrolTask, chase;
     
@@ -39,7 +40,7 @@ public class PatrolTreeComponent : MonoBehaviour
         {
             new Sequence(new List<Node>()
             {
-                new EnemyDetected(enemies, agent),
+                new EnemyDetected(enemies, agent, DetectionDistance),
                 new Chase(agent, animator),
                 new Attack(agent, animator)
             }),

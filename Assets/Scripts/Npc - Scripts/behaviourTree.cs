@@ -213,7 +213,7 @@ public class EnemyDetected : Node
     float detectionDistance, smallestDistance;
     bool enemyDectected = false;
 
-    public EnemyDetected(NavMeshAgent[] enemies, NavMeshAgent agent, float detectionDistance = 10)
+    public EnemyDetected(NavMeshAgent[] enemies, NavMeshAgent agent, float detectionDistance = 5)
     {
         this.enemies = enemies;
         this.agent = agent;
