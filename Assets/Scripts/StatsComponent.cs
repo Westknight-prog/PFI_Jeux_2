@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class StatsComponent : MonoBehaviour
 {
+    [SerializeField] ParticleSystem lvlUpEffect;
     public int MaxHp;
     public int CurrentHp;
     public int Accuracy;
@@ -14,7 +15,9 @@ public class StatsComponent : MonoBehaviour
     public int Level = 1;
     public int Exp;
 
-     
+    private void Awake()
+    {
+    }
 
 
     public void TakeDamage(int damage)
@@ -45,6 +48,8 @@ public class StatsComponent : MonoBehaviour
         {
             Exp -= Level * 100;
             CurrentHp = MaxHp;
+            lvlUpEffect.Clear();
+            lvlUpEffect.Play();
             levelPossible++;
             Level++;
         }
