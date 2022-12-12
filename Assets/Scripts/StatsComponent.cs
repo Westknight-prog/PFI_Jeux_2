@@ -50,7 +50,7 @@ public class StatsComponent : MonoBehaviour
             CurrentHp = MaxHp;
             lvlUpEffect.Clear();
             lvlUpEffect.Play();
-            levelPossible += 10;
+            levelPossible += 5;
             Level++;
         }
     }
