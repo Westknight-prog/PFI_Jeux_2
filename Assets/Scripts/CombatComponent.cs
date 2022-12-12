@@ -64,11 +64,12 @@ public class CombatComponent : MonoBehaviour
 
     private void Attack()
     {
+        playerAnimator.SetBool("isAttacking", true);
+        selfStats.gameObject.transform.LookAt(targetStats.transform);
+
         if (targetStats.Defence <= Random.Range(1, selfStats.Accuracy))
         {
-            selfStats.gameObject.transform.LookAt(targetStats.transform);
             targetStats.TakeDamage(Random.Range(1, selfStats.Attack / 3));
-            playerAnimator.SetBool("isAttacking", true);
         }
         else
         {
