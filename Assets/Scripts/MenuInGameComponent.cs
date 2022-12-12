@@ -8,7 +8,9 @@ public class MenuInGameComponent : MonoBehaviour
     bool menuOpened = false;
     [SerializeField] Canvas menu;
     [SerializeField] Canvas skill;
+    [SerializeField] Canvas validation;
     PlayerControls control;
+    LoadGameComponent gameManager;
     void Awake()
     {
         control = new PlayerControls();
@@ -17,6 +19,7 @@ public class MenuInGameComponent : MonoBehaviour
         control.PlayersControls.Skill.performed += Skill_performed;
         menu.gameObject.SetActive(false);
         skill.gameObject.SetActive(false);
+        gameManager = GetComponent<LoadGameComponent>();
     }
 
     private void Skill_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
@@ -61,5 +64,18 @@ public class MenuInGameComponent : MonoBehaviour
     public void QuitToMenu()
     {
         SceneManager.LoadScene("MainMenu");
+    }
+    public void OpenValidation()
+    {
+        validation.gameObject.SetActive(true);
+    }
+    public void CloseValidation()
+    {
+        validation.gameObject.SetActive(false);
+    }
+    public void SaveGame()
+    {
+        CloseValidation();
+        gameManager.SaveGame();
     }
 }

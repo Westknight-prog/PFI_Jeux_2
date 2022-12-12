@@ -16,8 +16,8 @@ public class RespawnPlayerComponent : MonoBehaviour
     {
         if (playerStats.dead)
         {
-            playerStats.gameObject.transform.position = gameObject.transform.position;
-            playerStats.gameObject.GetComponent<NavMeshAgent>().destination = gameObject.transform.position;
+            playerStats.gameObject.GetComponent<NavMeshAgent>().Warp(gameObject.transform.position);
+            playerStats.dead = false;
             playerStats.Heal();
         }
     }
