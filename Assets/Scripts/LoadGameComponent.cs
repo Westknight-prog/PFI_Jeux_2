@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class LoadGameComponent : MonoBehaviour
 {
@@ -23,7 +24,7 @@ public class LoadGameComponent : MonoBehaviour
             playerStats.Attack = int.Parse(listStats[6]);
             playerStats.Defence = int.Parse(listStats[7]);
 
-            playerStats.gameObject.transform.position = positionSaved;
+            playerStats.gameObject.GetComponent<NavMeshAgent>().Warp(positionSaved);
 
         }
        
