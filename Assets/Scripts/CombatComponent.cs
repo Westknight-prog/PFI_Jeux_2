@@ -76,7 +76,7 @@ public class CombatComponent : MonoBehaviour
             targetStats.TakeDamage(0);
         }
 
-        if (targetStats.Defence <= Random.Range(1, targetStats.Accuracy))
+        if (selfStats.Defence <= Random.Range(1, targetStats.Accuracy))
         {
             selfStats.TakeDamage(Random.Range(1, targetStats.Attack / 3));
         }

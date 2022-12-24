@@ -6,6 +6,7 @@ using UnityEngine;
 public class RegenComponent : MonoBehaviour
 {
     StatsComponent playerStats;
+    Animator playerAnimation;
     void Awake()
     {
         playerStats = GetComponent<StatsComponent>();
@@ -22,7 +23,10 @@ public class RegenComponent : MonoBehaviour
     {
         while (true)
         {
-            playerStats.Heal(playerStats.MaxHp/10);
+            if (!playerAnimation.GetBool("isAttacking"))
+            {
+                playerStats.Heal(playerStats.MaxHp/20);
+            }
             yield return new WaitForSeconds(5);
         }
         

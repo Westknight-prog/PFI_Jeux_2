@@ -20,7 +20,7 @@ public class MoveCameraComponent : MonoBehaviour
         Vector3 v3 = player.transform.position;
         v3.y += height;
         v3.z += distance;
-        transform.LookAt(player.transform);
         transform.position = v3;
+        transform.LookAt(player.transform);
     }
 }
